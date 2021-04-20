@@ -27,7 +27,7 @@ class Chain {
      */
     genesisBlock() {
         let timestamp = 1618399623804;
-        let genesisHash = this.caculateBlockHash(pckage.version, 0, '', this.constructTransactionMerkleTree(this.trans), timestamp, this.difficult, 0);
+        let genesisHash = this.caculateBlockHash(pckage.version, 0, '', this.constructTransactionMerkleTree(this.trans), timestamp, 2, 0);
         let genesisBlock = new Block(pckage.version, 0, '', genesisHash, '', [], timestamp, this.difficult,0);
         genesisBlock.setSize(JSON.stringify(genesisBlock).length);
         return genesisBlock;
