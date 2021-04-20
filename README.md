@@ -37,7 +37,9 @@ npm start
 
 # 创建HD钱包
 zcoin系统也实现了bicoin的HD钱包功能，主要是用来生成用户的地址，可通过createHDWallet </password/>命令创建，命令会生成两个文件，一个key.json用来存储种子密钥和主密钥。另一个mnemonic.json文件储存zcoin产生的助记词文件，以及密码的hash值（用来备份钱包，导入钱包使用）
+
 ![](./src/img/hdwallet.png)
+
 到这里就可以使用该zcoin系统进行挖矿等转账操作啦！！！
 # 其他
 系统详细的技术实现我将以章节的形式更新
