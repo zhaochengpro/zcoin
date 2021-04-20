@@ -172,9 +172,9 @@ vorpal
 vorpal
   .command('mine', '挖矿 生成新的区块')
   .action((args, callback) => {
-    let newGenerateBlock = this.chain.mine();
-    let lastUTXOPool = this.chain.UTXOPool;
-    this.boardcast(new Message(MessageType.MINE, {
+    let newGenerateBlock = chain.mine();
+    let lastUTXOPool = chain.UTXOPool;
+    p2p.boardcast(new Message(MessageType.MINE, {
         newBlock:newGenerateBlock,
         utxoPool:lastUTXOPool
     }));
