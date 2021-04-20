@@ -1,0 +1,27 @@
+{
+  "name": "zcoin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "zcoin.js",
+  "dependencies": {
+    "JASON": "^0.1.3",
+    "bip32": "^2.0.6",
+    "bip38": "^3.1.1",
+    "bip39": "^3.0.3",
+    "cli-table": "^0.3.6",
+    "crypto-js": "^4.0.0",
+    "mocha": "^8.3.2",
+    "safe-buffer": "^5.2.1",
+    "secp256k1": "^4.0.2",
+    "vorpal": "^1.11.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node zcoin.js",
+    "server": "node ./src/net/p2p.js",
+    "mytest": "mocha"
+  },
+  "author": "",
+  "license": "ISC"
+}

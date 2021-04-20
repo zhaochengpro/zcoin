@@ -1,0 +1,10 @@
+{
+            "seedKey":{
+                "prv":"6PRUMYTAd3f4phfHDcLhGcR6LDkejCsuzckCUgvRQ3PXi45pWUrUyWZCLq",
+                "pub":"038de3a8ddd5f795ee9a8237e39233471fefdbfa882543e37acbe390751935fff4"
+            },
+            "masterKey":{
+                "prv":"be48236d87fd48d8fc543ebe2c5909645ebea0c202bac41cb3b83e576d034abf",
+                "pub":"0306bfff783631520a18c1e7817cef41bad9b0d2605ea409da8071d724f1090765"
+            }
+}

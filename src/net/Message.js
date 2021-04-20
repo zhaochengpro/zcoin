@@ -1,0 +1,28 @@
+
+class Message {
+    constructor(type, data) {
+        this.type = type;
+        this.data = data;
+    }
+}
+const MessageType = {
+    "SAYHI": "SAYHI",
+    "REMOTE_ADDRESS": "REMOTE_ADDRESS",
+    "PEERLIST": "PEERLIST",
+    "HELLO":"HELLO",//新节点第一次向所有节点打招呼
+    "REPLY_HELLO":"REPLY_HELLO",
+    "REPLY_TWICE_HELLO":"REPLY_TWICE_HELLO",
+    "KNOW_NEWPEER": "KNOW_NEWPEER",
+    "REQUEST_BLOCKCHAIN": "REQUEST_BLOCKCHAIN",
+    "MINE": "MINE",
+    "TRANSFER": "TRANSFER",
+    "TEST_SYMMETRICNAT":'TEST_SYMMETRICNAT',
+    "REPLY_TEST_SYMMETRICNAT":"REPLY_TEST_SYMMETRICNAT",
+    "REPLY_TWICE_TEST_SYMMETRICNAT":"REPLY_TWICE_TEST_SYMMETRICNAT",
+    "PREVENT_DISCONNECT":'PREVENT_DISCONNECT',
+    "REPLY_PREVENT_DISCONNECT":"REPLY_PREVENT_DISCONNECT",
+}
+module.exports = {
+    Message,
+    MessageType
+};
