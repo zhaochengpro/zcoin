@@ -264,5 +264,5 @@ function searchNetWork() {
 searchNetWork();
 vorpal.exec('help')
 vorpal
-  .delimiter('bitcoinjs$')
+  .delimiter('zcoin$')
   .show();
