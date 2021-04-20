@@ -25,7 +25,7 @@ class Chain {
      * 生成创世区块
      * @returns 创世区块
      */
-    genesisBlock = function() {
+    genesisBlock() {
         let timestamp = 1618399623804;
         let genesisHash = this.caculateBlockHash(pckage.version, 0, '', this.constructTransactionMerkleTree(this.trans), timestamp, this.difficult, 0);
         let genesisBlock = new Block(pckage.version, 0, '', genesisHash, '', [], timestamp, this.difficult,0);
@@ -38,7 +38,7 @@ class Chain {
      * @param {*} block 
      * @returns 
      */
-    caculateBlockHashForBlock = function(blockhead) {
+    caculateBlockHashForBlock (blockhead) {
         return Cryptojs.SHA256(blockhead.version + blockhead.index + blockhead.prevHash + blockhead.transMerkleRootHash + blockhead.timestamp + blockhead.difficult + blockhead.nonce).toString();
     }
     /**
@@ -52,7 +52,7 @@ class Chain {
      * @param {Number} nonce 
      * @returns 
      */
-    caculateBlockHash = function(version, index, prevHash, transMerkleRootHash, timestamp, difficult, nonce) {
+    caculateBlockHash (version, index, prevHash, transMerkleRootHash, timestamp, difficult, nonce) {
         return Cryptojs.SHA256(version + index + prevHash + transMerkleRootHash + timestamp + difficult + nonce).toString();
     }
 
@@ -61,7 +61,7 @@ class Chain {
      * @param {*} block 
      * @returns 
      */
-    isValidBlockStructure = function(blockhead) {
+    isValidBlockStructure (blockhead) {
         if (typeof blockhead.version === 'string' &&
             typeof blockhead.index === 'number' &&
             typeof blockhead.hash === 'string' &&
@@ -78,7 +78,7 @@ class Chain {
      * @param {*} block 
      * @returns 
      */
-    isValidBlock = function(block, lastBlock) {
+    isValidBlock (block, lastBlock) {
 
         if (typeof block.index === 'number' &&
             typeof block.size === 'number' &&
@@ -94,7 +94,7 @@ class Chain {
      * @param {*} lastBlockhead 
      * @returns 
      */
-    isValidBlockHead = function(blockhead, lastBlockhead) {
+    isValidBlockHead (blockhead, lastBlockhead) {
         if (this.caculateBlockHashForBlock(blockhead) === blockhead.hash &&
             blockhead.prevHash === lastBlockhead.hash &&
             blockhead.timestamp > lastBlockhead.timestamp &&
@@ -108,7 +108,7 @@ class Chain {
      * @param {*} tran 
      * @returns 
      */
-    isValidTran = function(tran) {
+    isValidTran (tran) {
         if (tran.input instanceof Array &&
             typeof tran.inputCount === 'number' &&
             tran.output instanceof Array &&
@@ -123,7 +123,7 @@ class Chain {
      * 获得区块链中上一个区块
      * @returns 
      */
-    getLastBlock = function() {
+    getLastBlock () {
         return this.blockchain[this.blockchain.length - 1];
     }
 
@@ -132,7 +132,7 @@ class Chain {
      * @param {*} trans 
      * @returns 
      */
-    constructTransactionMerkleTree = function(trans) {
+    constructTransactionMerkleTree (trans) {
         if (trans.length === 0) return '';
         const transCount = trans.length;
         let tempTrans = []
@@ -151,7 +151,7 @@ class Chain {
      * @param {*} hashArray 
      * @returns 
      */
-    constructMerkleTreeFromBottom = function(hashArray) {
+    constructMerkleTreeFromBottom (hashArray) {
         if (!Array.isArray(hashArray) || hashArray.length === 0) return;
         if (hashArray.lengths === 1) return hashArray[0];
         while (hashArray.length > 1) {
@@ -172,7 +172,7 @@ class Chain {
      * 生成新的区块 
      * @returns 新区块
      */
-    generateNewBlock = function() {
+    generateNewBlock () {
         let nonce = 0;
         let version = pckage.version;
         let index = this.blockchain.length;
@@ -202,7 +202,7 @@ class Chain {
     /**
      * 挖矿
      */
-    mine = function() {
+    mine () {
         let pubK = Wallet.getMasterPublicKeys();
         if (!this.blockchain.length % 210000) {
             this.coinBaseAmount = this.coinBaseAmount / 2;
@@ -219,7 +219,7 @@ class Chain {
      * 调整出块的困难度。
      * @returns 
      */
-    adjustDifficult = function() {
+    adjustDifficult () {
         let height = this.blockchain.length;
         if (height % this.adjustDifficultBlockHeight !== 0) return;
         let lastAdjustBlock = this.blockchain[(height - this.adjustDifficultBlockHeight)];
@@ -240,7 +240,7 @@ class Chain {
      * @param {*} block 
      * @returns 
      */
-    isValidGensisBlock = function(block) {
+    isValidGensisBlock (block) {
         return JSON.stringify(block) === JSON.stringify(this.genesisBlock())
     }
     /**
@@ -248,7 +248,7 @@ class Chain {
      * @param {*} chain 
      * @returns 
      */
-    isValidBlockChain = function(blockchain) {
+    isValidBlockChain (blockchain) {
         if (!this.isValidGensisBlock(blockchain[0])) {
             console.log('创世区块不正确')
             return false;
@@ -265,7 +265,7 @@ class Chain {
      * @param {*} chain 
      * @returns 
      */
-    isValidChain = function(chain) {
+    isValidChain (chain) {
         if (typeof chain.difficult === 'number' &&
             chain.trans instanceof Array &&
             typeof chain.transMerkleRootHash === 'string' &&
@@ -283,7 +283,7 @@ class Chain {
      * @param {*} newBlockChain 
      * @returns 
      */
-    replaceBlockChain = function(newBlockChain) {
+    replaceBlockChain (newBlockChain) {
         if (newBlockChain.length === 1) {
             return
         }
@@ -297,7 +297,7 @@ class Chain {
      * 更新整个区块链系统（包括版本，交易，等）
      * @param {*} newChain 
      */
-    replaceChain = function(newChain) {
+    replaceChain (newChain) {
         if (newChain.blockchain.length > this.blockchain.length) {
             if (this.isValidChain(newChain)) {
                 this.UTXOPool = newChain.UTXOPool;
@@ -329,7 +329,7 @@ class Chain {
      * @param {*} amount 
      * @returns 
      */
-    transfer = function(from, to, amount) {
+    transfer (from, to, amount) {
         if (amount <= 0) return false;
         //从utxo池中获取所有有关输入的所有utxo
         let res = this.selectAmountFromUTXOPool(from);
@@ -365,7 +365,7 @@ class Chain {
      * @param {*} utxoPool 
      * @returns 
      */
-    deleteSpentUTXO = function(utxoPool) {
+    deleteSpentUTXO (utxoPool) {
         if (utxoPool.length <= 0) return;
         return utxoPool.filter((utxo) => {
             return !utxo.isSpent
@@ -376,7 +376,7 @@ class Chain {
      * 
      * @param {*} to 
      */
-    generateOutput = function(transcation, to, amount) {
+    generateOutput (transcation, to, amount) {
         let pubKeyHash = Cryptojs.RIPEMD160(to).toString();
         let scriptPubKey = `OP_DUP OP_HASH160 ${pubKeyHash} OP_EQUALVERIFY OP_CHECKSIG`
         let vout = transcation.addOutput(amount, scriptPubKey)
@@ -389,7 +389,7 @@ class Chain {
      * @param {*} res 
      * @returns 
      */
-    sortSelectedUTXO = function(res) {
+    sortSelectedUTXO (res) {
         if (!res || res.length === 0) return [];
         if (res.length === 1) return res;
         for (let i = 0; i < res.length - 1; i++) {
@@ -411,7 +411,7 @@ class Chain {
      * @param {*} address 
      * @returns 
      */
-    selectAmountFromUTXOPool = function(address) {
+    selectAmountFromUTXOPool (address) {
         if (this.UTXOPool.length === 0) return;
         let res = [];
         let addressHash = Address.getAddressByPub(address);
@@ -428,7 +428,7 @@ class Chain {
      * @param {*} amount 
      * @returns 返回涉及的utxo及找零 {utxo,change}
      */
-    chooseAmountFromUTXO = function(res, amount) {
+    chooseAmountFromUTXO (res, amount) {
         if (res.length === 0) return;
         //将小于amount的余额UTXO放到lessers中
         let lessers = res.filter((v) => {
@@ -472,9 +472,6 @@ class Chain {
                 change: 0
             }
         }
-    }
-    name(){
-        return 'Chain'
     }
 }
 
